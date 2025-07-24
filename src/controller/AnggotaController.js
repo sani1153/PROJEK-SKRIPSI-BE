@@ -1,51 +1,48 @@
+// AnggotaController.js (Disesuaikan)
+
 const Anggota = require('../models/AnggotaModels');
 const QRCode = require('qrcode');
 const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcrypt');
-const { sendMedia } = require('../services/WhatsappService');
+// Impor 'sendMedia' dan 'isReady' dari service
+const { sendMedia, isReady } = require('../services/whatsappService');
 const { Op } = require('sequelize');
 
 const daftarAnggota = async (req, res) => {
+  // TAMBAHKAN PENGECEKAN KESIAPAN CLIENT DI SINI
+  if (!isReady()) {
+    return res.status(503).json({
+      error: 'Layanan WhatsApp belum siap. Silakan coba lagi dalam beberapa saat.'
+    });
+  }
+
   try {
     const { nama, nim, nomor_hp, prodi, fakultas, alamat, password } = req.body;
 
-    // Cek duplikasi berdasarkan NIM atau nomor HP
     const existing = await Anggota.findOne({
-      where: {
-        [Op.or]: [{ nim }, { nomor_hp }]
-      }
+      where: { [Op.or]: [{ nim }, { nomor_hp }] }
     });
 
     if (existing) {
       return res.status(400).json({ error: 'NIM atau Nomor HP sudah terdaftar' });
     }
 
-    // Enkripsi password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Simpan anggota baru
     const anggota = await Anggota.create({
-      nama,
-      nim,
-      nomor_hp,
-      prodi,
-      fakultas,
-      alamat,
-      password: hashedPassword
+      nama, nim, nomor_hp, prodi, fakultas, alamat, password: hashedPassword
     });
 
-    // Buat QR Code
     const qrData = anggota.id_anggota;
     const qrFilePath = path.join(__dirname, `../public/qrcodes/${qrData}.png`);
     fs.mkdirSync(path.dirname(qrFilePath), { recursive: true });
     await QRCode.toFile(qrFilePath, qrData);
 
-    // Simpan path QR ke database
     anggota.QR_path = qrFilePath;
     await anggota.save();
 
-    // Kirim ke WhatsApp
+    // Pemanggilan sendMedia sekarang aman
     await sendMedia(nomor_hp, qrFilePath, `Assalamu'alaikum wr.wb\n\nHalo ${nama}, Selamat Bergabung di Perpustakaan Universitas Hamzanwadi 🤗\n\nIni adalah Kode QR ID Anggota Perpustakaan Anda. Silakan scan Kode QR ini untuk proses peminjaman buku. Jika hilang, kirim pesan "KIRIM ULANG KODE QR"\n\nTerima kasih telah bergabung!`);
 
     res.status(201).json({
@@ -61,13 +58,18 @@ const daftarAnggota = async (req, res) => {
         qr_path: anggota.QR_path
       }
     });
-
   } catch (err) {
     res.status(500).json({ error: 'Gagal mendaftar anggota', detail: err.message });
   }
 };
 
 const kirimUlangQRCode = async (nomor) => {
+  // TAMBAHKAN PENGECEKAN KESIAPAN CLIENT DI SINI JUGA
+  if (!isReady()) {
+    console.error('Gagal kirim ulang QR: WhatsApp client belum siap.');
+    return { success: false, message: 'Layanan WhatsApp belum siap.' };
+  }
+
   try {
     const anggota = await Anggota.findOne({ where: { nomor_hp: nomor } });
 
@@ -88,7 +90,6 @@ const kirimUlangQRCode = async (nomor) => {
     await sendMedia(anggota.nomor_hp, qrFilePath, `Assalamu'alaikum wr.wb\n\nHalo ${anggota.nama}, berikut adalah Kode QR ID Anggota Perpustakaan Anda.`);
 
     return { success: true };
-
   } catch (err) {
     console.error('Gagal mengirim ulang QR:', err);
     return { success: false, message: 'Terjadi kesalahan internal' };

@@ -1,21 +1,29 @@
-const { Client, LocalAuth } = require('whatsapp-web.js');
-// const { kirimUlangQRCode } = require('../controller/AnggotaController');
-const { MessageMedia } = require('whatsapp-web.js');
+// client.js (Disesuaikan)
+
+const { Client, LocalAuth, MessageMedia } = require('whatsapp-web.js');
 const QRCode = require('qrcode');
 const path = require('path');
 const fs = require('fs');
-const Anggota = require('../models/AnggotaModels'); // sesuaikan path jika berbeda
+const Anggota = require('../models/AnggotaModels');
+
+// Variabel untuk melacak status client
+let isClientReady = false;
 
 const client = new Client({
   authStrategy: new LocalAuth(),
   puppeteer: {
-    headless: 'new', // ganti dari true menjadi 'new'
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    headless: true,
+    args: ['--no-sandbox']
+  },
+  webVersionCache: {
+    type: 'remote',
+    remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html'
   }
 });
 
 client.on('ready', () => {
   console.log('WhatsApp client siap digunakan!');
+  isClientReady = true; // <-- Status diubah menjadi siap
 });
 
 client.on('authenticated', () => {
@@ -28,8 +36,10 @@ client.on('auth_failure', (msg) => {
 
 client.on('disconnected', (reason) => {
   console.log('Client terputus, alasan:', reason);
+  isClientReady = false; // <-- Set kembali status jika terputus
 });
 
+// Logika untuk pesan masuk sudah benar dan tidak perlu diubah
 client.on('message', async (msg) => {
   const text = msg.body.trim().toUpperCase();
 
@@ -49,7 +59,6 @@ client.on('message', async (msg) => {
       const qrFilePath = path.join(__dirname, `../public/qrcodes/${qrData}.png`);
       console.log('QR file path:', qrFilePath);
 
-      // Jika file QR belum ada, buat ulang
       if (!fs.existsSync(qrFilePath)) {
         console.log('QR file tidak ditemukan, membuat QR baru...');
         await QRCode.toFile(qrFilePath, qrData);
@@ -59,7 +68,7 @@ client.on('message', async (msg) => {
 
       const media = MessageMedia.fromFilePath(qrFilePath);
       await client.sendMessage(msg.from, media, {
-        caption: `Assalamu'alaikum wr.wb\n\nHalo ${anggota.nama}, berikut adalah Kde QR ID Anggota Perpustakaan Anda.`
+        caption: `Assalamu'alaikum wr.wb\n\nHalo ${anggota.nama}, berikut adalah Kode QR ID Anggota Perpustakaan Anda.`
       });
 
       console.log('QR Code berhasil dikirim.');
@@ -72,4 +81,8 @@ client.on('message', async (msg) => {
 
 client.initialize();
 
-module.exports = { client };
+// Ekspor client dan fungsi untuk memeriksa status
+module.exports = {
+  client,
+  isReady: () => isClientReady
+};
