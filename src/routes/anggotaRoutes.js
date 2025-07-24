@@ -4,6 +4,7 @@ const AnggotaController = require('../controller/AnggotaController');
 
 // Endpoint untuk mendaftar anggota
 router.post('/daftar', AnggotaController.daftarAnggota);
+router.post('/login', AnggotaController.loginAnggota);
 
 // [Opsional] Endpoint manual untuk kirim ulang QR (misalnya via Postman)
 router.post('/kirim-ulang', async (req, res) => {

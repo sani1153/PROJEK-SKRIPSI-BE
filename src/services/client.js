@@ -1,19 +1,27 @@
-// client.js (Disesuaikan)
-
 const { Client, LocalAuth, MessageMedia } = require('whatsapp-web.js');
 const QRCode = require('qrcode');
+const qrcodeTerminal = require('qrcode-terminal'); // ✅ TAMBAH INI
 const path = require('path');
 const fs = require('fs');
 const Anggota = require('../models/AnggotaModels');
 
-// Variabel untuk melacak status client
 let isClientReady = false;
 
 const client = new Client({
-  authStrategy: new LocalAuth(),
+  authStrategy: new LocalAuth({
+    dataPath: path.join(__dirname, '../../.wwebjs_auth') // ✅ Perbaiki path relatif
+  }),
   puppeteer: {
     headless: true,
-    args: ['--no-sandbox']
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-accelerated-2d-canvas',
+      '--no-first-run',
+      '--no-zygote',
+      '--disable-gpu'
+    ]
   },
   webVersionCache: {
     type: 'remote',
@@ -21,31 +29,38 @@ const client = new Client({
   }
 });
 
+// ✅ CETAK QR CODE DI TERMINAL
+client.on('qr', (qr) => {
+  console.log('📲 Scan QR Code berikut untuk login:');
+  qrcodeTerminal.generate(qr, { small: true });
+});
+
+// STATUS CLIENT
 client.on('ready', () => {
-  console.log('WhatsApp client siap digunakan!');
-  isClientReady = true; // <-- Status diubah menjadi siap
+  console.log('✅ WhatsApp client siap digunakan!');
+  isClientReady = true;
 });
 
 client.on('authenticated', () => {
-  console.log('Berhasil autentikasi dengan WhatsApp!');
+  console.log('🔐 Berhasil autentikasi dengan WhatsApp!');
 });
 
 client.on('auth_failure', (msg) => {
-  console.error('Gagal autentikasi', msg);
+  console.error('❌ Gagal autentikasi:', msg);
 });
 
 client.on('disconnected', (reason) => {
-  console.log('Client terputus, alasan:', reason);
-  isClientReady = false; // <-- Set kembali status jika terputus
+  console.log('⚠️ Client terputus, alasan:', reason);
+  isClientReady = false;
 });
 
-// Logika untuk pesan masuk sudah benar dan tidak perlu diubah
+// ✅ HANDLE PESAN MASUK
 client.on('message', async (msg) => {
   const text = msg.body.trim().toUpperCase();
 
   if (text === 'KIRIM ULANG KODE QR') {
     const nomorPengirim = msg.from.replace('@c.us', '');
-    console.log('Nomor pengirim yang diterima:', nomorPengirim);
+    console.log('Nomor pengirim:', nomorPengirim);
 
     try {
       const anggota = await Anggota.findOne({ where: { nomor_hp: nomorPengirim } });
@@ -57,13 +72,9 @@ client.on('message', async (msg) => {
 
       const qrData = anggota.id_anggota;
       const qrFilePath = path.join(__dirname, `../public/qrcodes/${qrData}.png`);
-      console.log('QR file path:', qrFilePath);
 
       if (!fs.existsSync(qrFilePath)) {
-        console.log('QR file tidak ditemukan, membuat QR baru...');
         await QRCode.toFile(qrFilePath, qrData);
-      } else {
-        console.log('QR file ditemukan, siap kirim...');
       }
 
       const media = MessageMedia.fromFilePath(qrFilePath);
@@ -71,9 +82,9 @@ client.on('message', async (msg) => {
         caption: `Assalamu'alaikum wr.wb\n\nHalo ${anggota.nama}, berikut adalah Kode QR ID Anggota Perpustakaan Anda.`
       });
 
-      console.log('QR Code berhasil dikirim.');
+      console.log('✅ QR Code berhasil dikirim.');
     } catch (err) {
-      console.error('Gagal mengirim ulang QR:', err.message);
+      console.error('❌ Gagal kirim ulang QR:', err.message);
       await msg.reply('Terjadi kesalahan saat mengirim ulang kode QR.');
     }
   }
@@ -81,7 +92,6 @@ client.on('message', async (msg) => {
 
 client.initialize();
 
-// Ekspor client dan fungsi untuk memeriksa status
 module.exports = {
   client,
   isReady: () => isClientReady

@@ -1,80 +1,31 @@
-2025/07/24-16:47:24.508 2f54 Reusing MANIFEST E:\Moh. Din Nur Ikhsani\Semester 8 (Skripsi)\Skripsi\Projek\New folder\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2025/07/24-16:47:24.509 2f54 Recovering log #136
-2025/07/24-16:47:24.509 2f54 Reusing old log E:\Moh. Din Nur Ikhsani\Semester 8 (Skripsi)\Skripsi\Projek\New folder\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000136.log 
-2025/07/24-16:47:24.509 2f54 Delete type=2 #135
-2025/07/24-16:47:25.851 2c88 Level-0 table #141: started
-2025/07/24-16:47:25.904 2c88 Level-0 table #141: 2307 bytes OK
-2025/07/24-16:47:25.966 2c88 Delete type=0 #136
-2025/07/24-16:47:25.967 2c88 Manual compaction at level-0 from '\x000\x00\x00\x00' @ 72057594037927935 : 1 .. '\x001\x00\x00\x00' @ 0 : 0; will stop at '\x000\x00\x00\xc8\x13\x00s\x00i\x00g\x00n\x00e\x00d\x00-\x00p\x00r\x00e\x00k\x00e\x00y\x00-\x00s\x00t\x00o\x00r\x00e' @ 13445 : 0
-2025/07/24-16:47:25.975 2c88 Compacting 1@0 + 1@1 files
-2025/07/24-16:47:26.048 2c88 Generated table #142@0: 876 keys, 14633 bytes
-2025/07/24-16:47:26.048 2c88 Compacted 1@0 + 1@1 files => 14633 bytes
-2025/07/24-16:47:26.115 2c88 compacted to: files[ 0 1 1 0 0 0 0 ]
-2025/07/24-16:47:26.115 2c88 Delete type=2 #141
-2025/07/24-16:47:26.117 2c88 Manual compaction at level-0 from '\x000\x00\x00\xc8\x13\x00s\x00i\x00g\x00n\x00e\x00d\x00-\x00p\x00r\x00e\x00k\x00e\x00y\x00-\x00s\x00t\x00o\x00r\x00e' @ 13445 : 0 .. '\x001\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/07/24-16:47:26.126 2c88 Level-0 table #144: started
-2025/07/24-16:47:26.202 2c88 Level-0 table #144: 9580 bytes OK
-2025/07/24-16:47:26.240 2c88 Delete type=2 #138
-2025/07/24-16:47:26.240 2c88 Delete type=0 #140
-2025/07/24-16:47:26.241 2c88 Manual compaction at level-0 from '\x00#\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00$\x00\x00\x00' @ 0 : 0; will stop at '\x002\x00\x00\xc8\x11\x00w\x00o\x00r\x00k\x00e\x00r\x00_\x00w\x00a\x00m\x00_\x00e\x00v\x00e\x00n\x00t\x00s' @ 14139 : 1
-2025/07/24-16:47:26.241 2c88 Compacting 1@0 + 1@1 files
-2025/07/24-16:47:26.291 2c88 Generated table #145@0: 944 keys, 10704 bytes
-2025/07/24-16:47:26.291 2c88 Compacted 1@0 + 1@1 files => 10704 bytes
-2025/07/24-16:47:26.363 2c88 compacted to: files[ 0 1 1 0 0 0 0 ]
-2025/07/24-16:47:26.364 2c88 Delete type=2 #144
-2025/07/24-16:47:26.365 2c88 Manual compaction at level-0 from '\x002\x00\x00\xc8\x11\x00w\x00o\x00r\x00k\x00e\x00r\x00_\x00w\x00a\x00m\x00_\x00e\x00v\x00e\x00n\x00t\x00s' @ 14139 : 1 .. '\x00$\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/07/24-16:47:26.365 2c88 Manual compaction at level-1 from '\x00#\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00$\x00\x00\x00' @ 0 : 0; will stop at '\x002\x00\x00\xc8\x11\x00w\x00o\x00r\x00k\x00e\x00r\x00_\x00w\x00a\x00m\x00_\x00e\x00v\x00e\x00n\x00t\x00s' @ 14139 : 1
-2025/07/24-16:47:26.365 2c88 Compacting 1@1 + 1@2 files
-2025/07/24-16:47:26.415 2c88 Generated table #146@1: 342 keys, 5211 bytes
-2025/07/24-16:47:26.415 2c88 Compacted 1@1 + 1@2 files => 5211 bytes
-2025/07/24-16:47:26.463 2c88 compacted to: files[ 0 0 1 0 0 0 0 ]
-2025/07/24-16:47:26.464 2c88 Delete type=2 #145
-2025/07/24-16:47:26.465 2c88 Manual compaction at level-1 from '\x002\x00\x00\xc8\x11\x00w\x00o\x00r\x00k\x00e\x00r\x00_\x00w\x00a\x00m\x00_\x00e\x00v\x00e\x00n\x00t\x00s' @ 14139 : 1 .. '\x00$\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/07/24-16:47:26.466 2364 Level-0 table #148: started
-2025/07/24-16:47:26.529 2364 Level-0 table #148: 511 bytes OK
-2025/07/24-16:47:26.553 2364 Delete type=2 #103
-2025/07/24-16:47:26.553 2364 Delete type=2 #142
-2025/07/24-16:47:26.553 2364 Delete type=0 #143
-2025/07/24-16:47:26.554 2364 Manual compaction at level-0 from '\x00/\x00\x00\x00' @ 72057594037927935 : 1 .. '\x000\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/07/24-16:47:26.554 2364 Manual compaction at level-1 from '\x00/\x00\x00\x00' @ 72057594037927935 : 1 .. '\x000\x00\x00\x00' @ 0 : 0; will stop at '\x00/\x02\x02\x03\x00\x00\x00\x00\x00\x00\xf0?' @ 14179 : 0
-2025/07/24-16:47:26.554 2364 Compacting 1@1 + 1@2 files
-2025/07/24-16:47:26.604 2364 Generated table #149@1: 313 keys, 4444 bytes
-2025/07/24-16:47:26.604 2364 Compacted 1@1 + 1@2 files => 4444 bytes
-2025/07/24-16:47:26.628 2364 compacted to: files[ 0 0 1 0 0 0 0 ]
-2025/07/24-16:47:26.628 2364 Delete type=2 #148
-2025/07/24-16:47:26.629 2364 Manual compaction at level-1 from '\x00/\x02\x02\x03\x00\x00\x00\x00\x00\x00\xf0?' @ 14179 : 0 .. '\x000\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/07/24-16:47:28.022 2c88 Manual compaction at level-0 from '\x003\x00\x00\x00' @ 72057594037927935 : 1 .. '\x004\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/07/24-16:47:28.044 2c88 Manual compaction at level-0 from '\x004\x00\x00\x00' @ 72057594037927935 : 1 .. '\x005\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/07/24-16:47:28.072 2c88 Manual compaction at level-0 from '\x005\x00\x00\x00' @ 72057594037927935 : 1 .. '\x006\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/07/24-16:47:28.094 2c88 Manual compaction at level-0 from '\x006\x00\x00\x00' @ 72057594037927935 : 1 .. '\x007\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/07/24-16:47:28.122 2c88 Manual compaction at level-0 from '\x007\x00\x00\x00' @ 72057594037927935 : 1 .. '\x008\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/07/24-16:47:28.143 2c88 Manual compaction at level-0 from '\x008\x00\x00\x00' @ 72057594037927935 : 1 .. '\x009\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/07/24-16:47:28.172 2c88 Manual compaction at level-0 from '\x009\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00:\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/07/24-16:47:28.193 2c88 Manual compaction at level-0 from '\x00=\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00>\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/07/24-16:47:28.221 2c88 Manual compaction at level-0 from '\x00;\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00<\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/07/24-16:47:28.225 2c88 Level-0 table #151: started
-2025/07/24-16:47:28.298 2c88 Level-0 table #151: 17643 bytes OK
-2025/07/24-16:47:28.341 2c88 Delete type=2 #146
-2025/07/24-16:47:28.341 2c88 Delete type=0 #147
-2025/07/24-16:47:28.341 2c88 Manual compaction at level-0 from '\x00<\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00=\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/07/24-16:47:28.393 2c88 Level-0 table #153: started
-2025/07/24-16:47:28.449 2c88 Level-0 table #153: 483 bytes OK
-2025/07/24-16:47:28.490 2c88 Delete type=0 #150
-2025/07/24-16:47:28.490 2c88 Manual compaction at level-0 from '\x00:\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00;\x00\x00\x00' @ 0 : 0; will stop at '\x00:\x00\x00\x05' @ 15229 : 0
-2025/07/24-16:47:28.490 2c88 Compacting 1@0 + 1@1 files
-2025/07/24-16:47:28.564 2c88 Generated table #154@0: 632 keys, 10935 bytes
-2025/07/24-16:47:28.564 2c88 Compacted 1@0 + 1@1 files => 10935 bytes
-2025/07/24-16:47:28.638 2c88 compacted to: files[ 0 1 1 0 0 0 0 ]
-2025/07/24-16:47:28.639 2c88 Delete type=2 #153
-2025/07/24-16:47:28.640 2c88 Manual compaction at level-0 from '\x00:\x00\x00\x05' @ 15229 : 0 .. '\x00;\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/07/24-16:47:28.748 2c88 Level-0 table #156: started
-2025/07/24-16:47:28.778 2c88 Level-0 table #156: 6417 bytes OK
-2025/07/24-16:47:28.806 2c88 Delete type=2 #151
-2025/07/24-16:47:28.806 2c88 Delete type=0 #152
-2025/07/24-16:47:28.807 2c88 Manual compaction at level-0 from '\x00@\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00A\x00\x00\x00' @ 0 : 0; will stop at '\x00@\x00\x00\x05' @ 15648 : 1
-2025/07/24-16:47:28.807 2c88 Compacting 1@0 + 1@1 files
-2025/07/24-16:47:28.866 2c88 Generated table #157@0: 886 keys, 14873 bytes
-2025/07/24-16:47:28.866 2c88 Compacted 1@0 + 1@1 files => 14873 bytes
-2025/07/24-16:47:28.889 2c88 compacted to: files[ 0 1 1 0 0 0 0 ]
-2025/07/24-16:47:28.889 2c88 Delete type=2 #156
-2025/07/24-16:47:28.890 2c88 Manual compaction at level-0 from '\x00@\x00\x00\x05' @ 15648 : 1 .. '\x00A\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/07/24-21:09:58.762 8a8 Reusing MANIFEST E:\Moh. Din Nur Ikhsani\Semester 8 (Skripsi)\Skripsi\Projek\New folder\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/07/24-21:09:58.763 8a8 Recovering log #307
+2025/07/24-21:09:58.893 8a8 Reusing old log E:\Moh. Din Nur Ikhsani\Semester 8 (Skripsi)\Skripsi\Projek\New folder\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000307.log 
+2025/07/24-21:10:08.578 18cc Level-0 table #321: started
+2025/07/24-21:10:08.672 18cc Level-0 table #321: 321295 bytes OK
+2025/07/24-21:10:08.721 18cc Delete type=0 #307
+2025/07/24-21:10:08.722 18cc Manual compaction at level-0 from '\x00\x1a\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1b\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/07/24-21:10:14.986 4678 Compacting 1@1 + 10@2 files
+2025/07/24-21:10:15.879 4678 Generated table #322@1: 39262 keys, 2216535 bytes
+2025/07/24-21:10:16.478 4678 Generated table #323@1: 17743 keys, 2174803 bytes
+2025/07/24-21:10:16.922 4678 Generated table #324@1: 2817 keys, 2154788 bytes
+2025/07/24-21:10:17.328 4678 Generated table #325@1: 2810 keys, 2157939 bytes
+2025/07/24-21:10:17.737 4678 Generated table #326@1: 15054 keys, 2186557 bytes
+2025/07/24-21:10:18.163 4678 Generated table #327@1: 27986 keys, 2260972 bytes
+2025/07/24-21:10:18.606 4678 Generated table #328@1: 12523 keys, 2148311 bytes
+2025/07/24-21:10:19.255 4678 Generated table #329@1: 94192 keys, 2242782 bytes
+2025/07/24-21:10:19.770 4678 Generated table #330@1: 101169 keys, 2251338 bytes
+2025/07/24-21:10:20.001 4678 Generated table #331@1: 35176 keys, 791281 bytes
+2025/07/24-21:10:20.001 4678 Compacted 1@1 + 10@2 files => 20585306 bytes
+2025/07/24-21:10:20.025 4678 compacted to: files[ 0 0 10 0 0 0 0 ]
+2025/07/24-21:10:20.025 4678 Delete type=2 #309
+2025/07/24-21:10:20.025 4678 Delete type=2 #310
+2025/07/24-21:10:20.026 4678 Delete type=2 #311
+2025/07/24-21:10:20.026 4678 Delete type=2 #312
+2025/07/24-21:10:20.026 4678 Delete type=2 #313
+2025/07/24-21:10:20.026 4678 Delete type=2 #314
+2025/07/24-21:10:20.026 4678 Delete type=2 #315
+2025/07/24-21:10:20.026 4678 Delete type=2 #316
+2025/07/24-21:10:20.026 4678 Delete type=2 #317
+2025/07/24-21:10:20.026 4678 Delete type=2 #318
+2025/07/24-21:10:20.026 4678 Delete type=2 #321

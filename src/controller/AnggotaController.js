@@ -96,7 +96,49 @@ const kirimUlangQRCode = async (nomor) => {
   }
 };
 
+const loginAnggota = async (req, res) => {
+  const { nim, password } = req.body;
+
+  if (!nim || !password) {
+    return res.status(400).json({ error: 'NIM dan Password wajib diisi' });
+  }
+
+  try {
+    const anggota = await Anggota.findOne({ where: { nim } });
+
+    if (!anggota) {
+      return res.status(404).json({ error: 'Anggota tidak ditemukan' });
+    }
+
+    const isMatch = await bcrypt.compare(password, anggota.password);
+
+    if (!isMatch) {
+      return res.status(401).json({ error: 'Password salah' });
+    }
+
+    // Jangan kirimkan password ke response
+    const { id_anggota, nama, nomor_hp, prodi, fakultas, alamat, QR_path } = anggota;
+
+    res.status(200).json({
+      message: 'Login berhasil',
+      anggota: {
+        id_anggota,
+        nama,
+        nim,
+        nomor_hp,
+        prodi,
+        fakultas,
+        alamat,
+        qr_path: QR_path
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ error: 'Gagal login', detail: err.message });
+  }
+};
+
 module.exports = {
   daftarAnggota,
-  kirimUlangQRCode
+  kirimUlangQRCode,
+  loginAnggota
 };
