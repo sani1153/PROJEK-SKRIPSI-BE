@@ -54,10 +54,4 @@ const Buku = db.define('buku', {
     freezeTableName: true
 });
 
-// db.sync({ alter: true })
-//   .then(() => {
-//     console.log(`buku synced`);
-//   })
-//   .catch((error) => console.log(`Unable to connect to database: ${error}`));
-
 module.exports = Buku;

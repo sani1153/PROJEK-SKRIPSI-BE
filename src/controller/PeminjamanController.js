@@ -12,7 +12,7 @@ const pinjamBuku = async (req, res) => {
     const peminjamanAktif = await Peminjaman.findAll({
       where: {
         id_anggota,
-        status: 'dipinjam'
+        status: 'Dipinjam' // ✅ Sesuaikan kapitalisasi
       }
     });
 
@@ -34,7 +34,7 @@ const pinjamBuku = async (req, res) => {
       id_buku,
       tanggal_pinjam: tanggal_sekarang,
       tanggal_kembali: new Date(new Date().setDate(new Date().getDate() + 7)).toISOString().slice(0, 10),
-      status: 'dipinjam'
+      status: 'Dipinjam' // ✅ Sesuaikan kapitalisasi
     });
 
     const anggota = await Anggota.findByPk(id_anggota);

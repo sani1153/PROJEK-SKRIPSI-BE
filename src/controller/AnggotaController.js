@@ -5,6 +5,7 @@ const QRCode = require('qrcode');
 const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 // Impor 'sendMedia' dan 'isReady' dari service
 const { sendMedia, isReady } = require('../services/whatsappService');
 const { Op } = require('sequelize');
@@ -116,11 +117,23 @@ const loginAnggota = async (req, res) => {
       return res.status(401).json({ error: 'Password salah' });
     }
 
-    // Jangan kirimkan password ke response
+    // Buat JWT token
+    const token = jwt.sign(
+      {
+        id_anggota: anggota.id_anggota,
+        nim: anggota.nim,
+        nama: anggota.nama
+      },
+      process.env.JWT_SECRET || 'SECRETKEY', // Ganti dengan env di production
+      { expiresIn: '12h' }
+    );
+
+    // Kirim response tanpa password
     const { id_anggota, nama, nomor_hp, prodi, fakultas, alamat, QR_path } = anggota;
 
     res.status(200).json({
       message: 'Login berhasil',
+      token,
       anggota: {
         id_anggota,
         nama,
@@ -136,6 +149,7 @@ const loginAnggota = async (req, res) => {
     res.status(500).json({ error: 'Gagal login', detail: err.message });
   }
 };
+
 
 module.exports = {
   daftarAnggota,
