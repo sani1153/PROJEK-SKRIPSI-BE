@@ -1,6 +1,15 @@
-2025/07/26-20:37:32.278 43a8 Reusing MANIFEST E:\Moh. Din Nur Ikhsani\Semester 8 (Skripsi)\Skripsi\Projek\New folder\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
-2025/07/26-20:37:32.282 43a8 Recovering log #10
-2025/07/26-20:37:32.282 43a8 Reusing old log E:\Moh. Din Nur Ikhsani\Semester 8 (Skripsi)\Skripsi\Projek\New folder\.wwebjs_auth\session\Default\Local Storage\leveldb/000010.log 
-2025/07/26-20:39:33.580 be8 Level-0 table #14: started
-2025/07/26-20:39:33.639 be8 Level-0 table #14: 14919 bytes OK
-2025/07/26-20:39:33.707 be8 Delete type=0 #10
+2025/07/26-21:44:35.811 3308 Reusing MANIFEST E:\Moh. Din Nur Ikhsani\Semester 8 (Skripsi)\Skripsi\Projek\New folder\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
+2025/07/26-21:44:35.816 3308 Recovering log #16
+2025/07/26-21:44:35.817 3308 Reusing old log E:\Moh. Din Nur Ikhsani\Semester 8 (Skripsi)\Skripsi\Projek\New folder\.wwebjs_auth\session\Default\Local Storage\leveldb/000016.log 
+2025/07/26-21:46:37.068 247c Level-0 table #20: started
+2025/07/26-21:46:37.140 247c Level-0 table #20: 15136 bytes OK
+2025/07/26-21:46:37.168 247c Delete type=0 #16
+2025/07/26-21:46:37.169 1668 Compacting 4@0 + 1@1 files
+2025/07/26-21:46:37.203 1668 Generated table #21@0: 167 keys, 6126 bytes
+2025/07/26-21:46:37.203 1668 Compacted 4@0 + 1@1 files => 6126 bytes
+2025/07/26-21:46:37.235 1668 compacted to: files[ 0 1 1 0 0 0 0 ]
+2025/07/26-21:46:37.235 1668 Delete type=2 #8
+2025/07/26-21:46:37.235 1668 Delete type=2 #11
+2025/07/26-21:46:37.235 1668 Delete type=2 #14
+2025/07/26-21:46:37.235 1668 Delete type=2 #17
+2025/07/26-21:46:37.235 1668 Delete type=2 #20

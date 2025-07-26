@@ -79,7 +79,7 @@ client.on('message', async (msg) => {
 
       const media = MessageMedia.fromFilePath(qrFilePath);
       await client.sendMessage(msg.from, media, {
-        caption: `Assalamu'alaikum wr.wb\n\nHalo ${anggota.nama}, berikut adalah Kode QR ID Anggota Perpustakaan Anda.`
+        caption: `Assalamu'alaikum wr.wb\n\nHalo ${nama},\nIni adalah Kode QR ID Anggota Perpustakaan Anda. Silakan scan Kode QR ini untuk proses peminjaman buku. Jika hilang, kirim pesan "KIRIM ULANG KODE QR"\n\nTerima kasih!`
       });
 
       console.log('✅ QR Code berhasil dikirim.');
