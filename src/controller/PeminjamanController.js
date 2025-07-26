@@ -1,6 +1,5 @@
-const Peminjaman = require('../models/PeminjamanModels');
+const { Peminjaman, Buku } = require('../models/relasi');
 const Anggota = require('../models/AnggotaModels');
-const Buku = require('../models/BukuModels');
 const { sendMessage } = require('../services/whatsappService');
 const { Op } = require('sequelize');
 
@@ -52,6 +51,44 @@ const tolak = async (req, res, id_anggota, alasan) => {
   res.status(400).json({ message: 'Peminjaman ditolak', alasan });
 };
 
+const getPeminjamanByAnggota = async (req, res) => {
+  try {
+    const { id_anggota } = req.params;
+    console.log('ID Anggota:', id_anggota);
+
+    const peminjaman = await Peminjaman.findAll({
+      where: { id_anggota },
+      include: [
+        {
+          model: Buku,
+          attributes: ['id_buku', 'judul_buku', 'penulis', 'kategori', 'cover']
+        }
+      ],
+      order: [['status', 'DESC'], ['tanggal_pinjam', 'DESC']]
+    });
+
+    console.log('Jumlah peminjaman:', peminjaman.length);
+
+    const result = peminjaman.map(p => ({
+      id_buku: p.buku?.id_buku,
+      judul_buku: p.buku?.judul_buku,
+      penulis: p.buku?.penulis,
+      kategori: p.buku?.kategori,
+      cover: p.buku?.cover,
+      status: p.status
+    }));
+
+    console.log(JSON.stringify(peminjaman, null, 2));
+
+    res.json(result);
+  } catch (error) {
+    console.error('Error:', error.message);
+    res.status(500).json({ error: 'Gagal mengambil data peminjaman', detail: error.message });
+  }
+};
+
+
 module.exports = {
-  pinjamBuku
+  pinjamBuku, 
+  getPeminjamanByAnggota
 };

@@ -38,5 +38,5 @@ const Peminjaman = db.define('peminjaman', {
   }, {
     freezeTableName: true
   });
-  
+
 module.exports = Peminjaman;

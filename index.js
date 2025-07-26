@@ -34,10 +34,6 @@ app.use((req, res, next) => {
 // === ROUTES PUBLIK ===
 app.use(anggotaRoutes); // login & daftar tidak perlu token
 app.use(bukuRoute);
-
-// === ROUTES TERPROTEKSI (HARUS LOGIN) ===
-app.use(authenticate); // semua route setelah ini wajib token
-
 app.use(peminjamanRoutes);
 app.use(notifikasiRoutes);
 
