@@ -25,6 +25,10 @@ const Peminjaman = db.define('peminjaman', {
       type: DataTypes.DATEONLY,
       allowNull: true
     },
+    tanggal_pengembalian: {
+      type: DataTypes.DATEONLY,
+      allowNull: true
+    },    
     status: {
       type: DataTypes.ENUM('Dipinjam', 'Dikembalikan'),
       allowNull: false,
@@ -38,5 +42,9 @@ const Peminjaman = db.define('peminjaman', {
   }, {
     freezeTableName: true
   });
+
+// db.sync({ alter: true })
+//   .then(() => console.log("All models synced"))
+//   .catch((error) => console.error(`Unable to sync database: ${error}`));
 
 module.exports = Peminjaman;
