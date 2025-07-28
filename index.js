@@ -10,6 +10,8 @@ const anggotaRoutes = require('./src/routes/anggotaRoutes');
 const peminjamanRoutes = require('./src/routes/peminjamanRoutes');
 const notifikasiRoutes = require('./src/routes/notifikasiRoutes');
 const bukuRoute = require('./src/routes/BukuRoutes');
+const petugasRoutes = require('./src/routes/petugasRoutes');
+const getAllRoutes = require('./src/routes/getAllRoutes');
 
 // Import middleware
 const authenticate = require('./src/middleware/authenticate');
@@ -36,6 +38,8 @@ app.use(anggotaRoutes); // login & daftar tidak perlu token
 app.use(bukuRoute);
 app.use(peminjamanRoutes);
 app.use(notifikasiRoutes);
+app.use(petugasRoutes);
+app.use(getAllRoutes);
 
 // Root
 app.get('/', (req, res) => {

@@ -1,5 +1,3 @@
-// AnggotaController.js (Disesuaikan)
-
 const Anggota = require('../models/AnggotaModels');
 const QRCode = require('qrcode');
 const fs = require('fs');
@@ -122,7 +120,9 @@ const loginAnggota = async (req, res) => {
       {
         id_anggota: anggota.id_anggota,
         nim: anggota.nim,
-        nama: anggota.nama
+        nama: anggota.nama,
+        prodi: anggota.prodi,
+        fakultas: anggota.fakultas
       },
       process.env.JWT_SECRET || 'SECRETKEY', // Ganti dengan env di production
       { expiresIn: '12h' }
@@ -150,9 +150,45 @@ const loginAnggota = async (req, res) => {
   }
 };
 
+const ubahPasswordAnggota = async (req, res) => {
+  try {
+    const { id_anggota } = req.params;
+    const { old_password, new_password } = req.body;
+
+    if (!old_password || !new_password) {
+      return res.status(400).json({ error: "Password lama dan baru wajib diisi." });
+    }
+
+    // Ambil data anggota
+    const anggota = await Anggota.findByPk(id_anggota);
+    if (!anggota) {
+      return res.status(404).json({ error: "Anggota tidak ditemukan." });
+    }
+
+    // Cek password lama
+    const isMatch = await bcrypt.compare(old_password, anggota.password);
+    if (!isMatch) {
+      return res.status(401).json({ error: "Password lama salah." });
+    }
+
+    // Hash password baru
+    const hashedPassword = await bcrypt.hash(new_password, 10);
+
+    // Update password di database
+    anggota.password = hashedPassword;
+    await anggota.save();
+
+    res.json({ message: "Password berhasil diubah." });
+  } catch (err) {
+    console.error("Gagal ubah password:", err);
+    res.status(500).json({ error: "Terjadi kesalahan server.", detail: err.message });
+  }
+};
+
 
 module.exports = {
   daftarAnggota,
   kirimUlangQRCode,
-  loginAnggota
+  loginAnggota,
+  ubahPasswordAnggota
 };

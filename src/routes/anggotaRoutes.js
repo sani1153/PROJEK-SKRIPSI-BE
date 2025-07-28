@@ -5,6 +5,7 @@ const AnggotaController = require('../controller/AnggotaController');
 // Endpoint untuk mendaftar anggota
 router.post('/daftar', AnggotaController.daftarAnggota);
 router.post('/login', AnggotaController.loginAnggota);
+router.put("/anggota/:id_anggota/ubah-password", AnggotaController.ubahPasswordAnggota);
 
 // [Opsional] Endpoint manual untuk kirim ulang QR (misalnya via Postman)
 router.post('/kirim-ulang', async (req, res) => {
@@ -22,5 +23,6 @@ router.post('/kirim-ulang', async (req, res) => {
     res.status(404).json({ error: result.message || 'Gagal kirim ulang QR' });
   }
 });
+
 
 module.exports = router;

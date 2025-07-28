@@ -1,38 +1,27 @@
-2025/07/28-11:23:10.006 2cc4 Reusing MANIFEST E:\Moh. Din Nur Ikhsani\Semester 8 (Skripsi)\Skripsi\Projek\New folder\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2025/07/28-11:23:10.007 2cc4 Recovering log #1204
-2025/07/28-11:23:10.118 2cc4 Reusing old log E:\Moh. Din Nur Ikhsani\Semester 8 (Skripsi)\Skripsi\Projek\New folder\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/001204.log 
-2025/07/28-11:23:12.525 3130 Level-0 table #1220: started
-2025/07/28-11:23:12.672 3130 Level-0 table #1220: 456618 bytes OK
-2025/07/28-11:23:12.696 3130 Delete type=0 #1204
-2025/07/28-11:23:12.697 3130 Manual compaction at level-0 from '\x00L\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00M\x00\x00\x00' @ 0 : 0; will stop at '\x00L\x00\x00\x05' @ 3236981 : 1
-2025/07/28-11:23:12.698 3130 Compacting 1@0 + 1@1 files
-2025/07/28-11:23:12.830 3130 Generated table #1221@0: 11574 keys, 213460 bytes
-2025/07/28-11:23:12.880 3130 Generated table #1222@0: 276 keys, 6244 bytes
-2025/07/28-11:23:12.880 3130 Compacted 1@0 + 1@1 files => 219704 bytes
-2025/07/28-11:23:12.929 3130 compacted to: files[ 0 2 17 0 0 0 0 ]
-2025/07/28-11:23:12.930 3130 Delete type=2 #1220
-2025/07/28-11:23:12.930 3130 Manual compaction at level-0 from '\x00L\x00\x00\x05' @ 3236981 : 1 .. '\x00M\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/07/28-11:23:18.010 2cc4 Compacting 1@1 + 9@2 files
-2025/07/28-11:23:18.487 2cc4 Generated table #1223@1: 89152 keys, 2239705 bytes
-2025/07/28-11:23:18.950 2cc4 Generated table #1224@1: 82239 keys, 2262123 bytes
-2025/07/28-11:23:19.387 2cc4 Generated table #1225@1: 30220 keys, 2206524 bytes
-2025/07/28-11:23:19.581 2cc4 Generated table #1226@1: 2266 keys, 2154757 bytes
-2025/07/28-11:23:19.808 2cc4 Generated table #1227@1: 2717 keys, 2155896 bytes
-2025/07/28-11:23:20.062 2cc4 Generated table #1228@1: 2778 keys, 2150814 bytes
-2025/07/28-11:23:20.484 2cc4 Generated table #1229@1: 19603 keys, 2208217 bytes
-2025/07/28-11:23:20.816 2cc4 Generated table #1230@1: 30483 keys, 2254950 bytes
-2025/07/28-11:23:21.007 2cc4 Generated table #1231@1: 8334 keys, 2141458 bytes
-2025/07/28-11:23:21.080 2cc4 Generated table #1232@1: 348 keys, 56028 bytes
-2025/07/28-11:23:21.080 2cc4 Compacted 1@1 + 9@2 files => 19830472 bytes
-2025/07/28-11:23:21.152 2cc4 compacted to: files[ 0 1 18 0 0 0 0 ]
-2025/07/28-11:23:21.154 2cc4 Delete type=2 #1207
-2025/07/28-11:23:21.154 2cc4 Delete type=2 #1208
-2025/07/28-11:23:21.155 2cc4 Delete type=2 #1209
-2025/07/28-11:23:21.155 2cc4 Delete type=2 #1210
-2025/07/28-11:23:21.155 2cc4 Delete type=2 #1211
-2025/07/28-11:23:21.155 2cc4 Delete type=2 #1212
-2025/07/28-11:23:21.155 2cc4 Delete type=2 #1213
-2025/07/28-11:23:21.155 2cc4 Delete type=2 #1214
-2025/07/28-11:23:21.155 2cc4 Delete type=2 #1215
-2025/07/28-11:23:21.155 2cc4 Delete type=2 #1216
-2025/07/28-11:23:21.155 2cc4 Delete type=2 #1221
+2025/07/28-22:36:05.838 48f4 Reusing MANIFEST E:\Moh. Din Nur Ikhsani\Semester 8 (Skripsi)\Skripsi\Projek\New folder\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/07/28-22:36:05.839 48f4 Recovering log #1731
+2025/07/28-22:36:06.361 48f4 Reusing old log E:\Moh. Din Nur Ikhsani\Semester 8 (Skripsi)\Skripsi\Projek\New folder\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/001731.log 
+2025/07/28-22:36:09.587 4a2c Level-0 table #1746: started
+2025/07/28-22:36:09.734 4a2c Level-0 table #1746: 603268 bytes OK
+2025/07/28-22:36:09.762 4a2c Delete type=0 #1731
+2025/07/28-22:36:09.763 4a2c Manual compaction at level-0 from '\x00m\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00n\x00\x00\x00' @ 0 : 0; will stop at '\x00m\x00\x00\x05' @ 3939029 : 1
+2025/07/28-22:36:09.764 4a2c Compacting 1@0 + 0@1 files
+2025/07/28-22:36:09.919 4a2c Generated table #1747@0: 13695 keys, 285374 bytes
+2025/07/28-22:36:09.968 4a2c Generated table #1748@0: 6 keys, 454 bytes
+2025/07/28-22:36:09.968 4a2c Compacted 1@0 + 0@1 files => 285828 bytes
+2025/07/28-22:36:10.002 4a2c compacted to: files[ 0 2 18 0 0 0 0 ]
+2025/07/28-22:36:10.004 4a2c Delete type=2 #1746
+2025/07/28-22:36:10.005 4a2c Manual compaction at level-0 from '\x00m\x00\x00\x05' @ 3939029 : 1 .. '\x00n\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/07/28-22:36:15.457 497c Compacting 1@1 + 10@2 files
+2025/07/28-22:36:16.152 497c Generated table #1749@1: 87148 keys, 2236620 bytes
+2025/07/28-22:36:16.788 497c Generated table #1750@1: 98809 keys, 2250940 bytes
+2025/07/28-22:36:17.384 497c Generated table #1751@1: 60952 keys, 2254796 bytes
+2025/07/28-22:36:17.881 497c Generated table #1752@1: 26780 keys, 2192987 bytes
+2025/07/28-22:36:18.087 497c Generated table #1753@1: 2523 keys, 2155984 bytes
+2025/07/28-22:36:18.326 497c Generated table #1754@1: 2573 keys, 2156483 bytes
+2025/07/28-22:36:18.493 497c Generated table #1755@1: 2632 keys, 2148656 bytes
+2025/07/28-22:36:18.759 497c Generated table #1756@1: 23521 keys, 2230560 bytes
+2025/07/28-22:36:19.100 497c Generated table #1757@1: 29504 keys, 2244938 bytes
+2025/07/28-22:36:19.328 497c Generated table #1758@1: 6887 keys, 2129902 bytes
+2025/07/28-22:36:19.331 497c Compacted 1@1 + 10@2 files => 22001866 bytes
+2025/07/28-22:36:19.361 497c compacted to: files[ 0 1 18 0 0 0 0 ]

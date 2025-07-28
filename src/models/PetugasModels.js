@@ -3,9 +3,9 @@ const db = require('../config/db');
 
 const Petugas = db.define('petugas', {
   id_Petugas: {
-    type: DataTypes.STRING(255),
-    primaryKey: true,
-    allowNull: false,
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
   },
   username: {
     type: DataTypes.STRING(255),
