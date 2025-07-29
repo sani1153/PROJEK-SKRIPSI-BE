@@ -13,8 +13,8 @@ const { Op, Sequelize } = require('sequelize');
  */
 const addBuku = async (req, res) => {
   try {
-    // Jika cover diupload via multer: 
-    const coverPath = req.file ? req.file.path : req.body.cover;
+    const coverPath = req.savedCoverPath || req.body.cover;
+
     const {
       id_buku,
       judul_buku,
@@ -25,14 +25,17 @@ const addBuku = async (req, res) => {
       kategori,
       bahasa,
       deskripsi,
-      cover,
       halaman
     } = req.body;
 
-    // Validasi sederhana
     if (!id_buku || !judul_buku) {
       return res.status(400).json({ message: 'id_buku dan judul_buku wajib diisi' });
     }
+
+    if (coverPath && coverPath.includes(':\\')) {
+      return res.status(400).json({ message: 'Path cover tidak valid.' });
+    }
+
 
     const data = await Buku.create({
       id_buku,
@@ -59,6 +62,7 @@ const addBuku = async (req, res) => {
     });
   }
 };
+
 
 
 /**
@@ -182,54 +186,47 @@ const getRandomBuku = async (req, res) => {
   }
 };
 
-
-/**
- * (Opsional) UPDATE BUKU
- * PUT /buku/:id
- */
+// ========== UPDATE / EDIT BUKU ==========
 const updateBuku = async (req, res) => {
   try {
     const { id } = req.params;
+
     const buku = await Buku.findByPk(id);
     if (!buku) {
       return res.status(404).json({ message: 'Buku tidak ditemukan' });
     }
 
+    // Update field berdasarkan body
     await buku.update(req.body);
 
-    res.json({
-      message: 'Update Buku Success',
-      data: buku
+    res.status(200).json({
+      message: 'Buku berhasil diperbarui',
+      data: buku,
     });
   } catch (error) {
-    res.status(500).json({
-      message: 'Gagal update buku',
-      error: error.message
-    });
+    console.error("Update buku error:", error);
+    res.status(500).json({ message: 'Terjadi kesalahan saat mengupdate buku' });
   }
 };
 
-
-/**
- * (Opsional) DELETE BUKU
- * DELETE /buku/:id
- */
+// ========== DELETE / HAPUS BUKU ==========
 const deleteBuku = async (req, res) => {
   try {
     const { id } = req.params;
+
     const buku = await Buku.findByPk(id);
     if (!buku) {
       return res.status(404).json({ message: 'Buku tidak ditemukan' });
     }
+
     await buku.destroy();
-    res.json({
-      message: 'Delete Buku Success'
+
+    res.status(200).json({
+      message: 'Buku berhasil dihapus'
     });
   } catch (error) {
-    res.status(500).json({
-      message: 'Gagal delete buku',
-      error: error.message
-    });
+    console.error("Delete buku error:", error);
+    res.status(500).json({ message: 'Terjadi kesalahan saat menghapus buku' });
   }
 };
 
