@@ -1,5 +1,4 @@
-const { Peminjaman, Buku } = require("../models/relasi");
-const Anggota = require("../models/AnggotaModels");
+const { Peminjaman, Buku, Anggota } = require('../models/relasi');
 const { sendMessage, sendMedia } = require("../services/whatsappService");
 const path = require("path");
 const { Op } = require("sequelize");
@@ -7,8 +6,10 @@ const { Op } = require("sequelize");
 const pinjamBuku = async (req, res) => {
   try {
     const { id_anggota, id_buku } = req.body;
+
     const tanggal_sekarang = new Date();
     const tanggal_pinjam = tanggal_sekarang.toISOString().slice(0, 10);
+
     const tanggal_kembali_obj = new Date(tanggal_sekarang);
     tanggal_kembali_obj.setDate(tanggal_kembali_obj.getDate() + 7);
     const tanggal_kembali = tanggal_kembali_obj.toISOString().slice(0, 10);
@@ -41,17 +42,27 @@ const pinjamBuku = async (req, res) => {
       );
     }
 
+    // Ambil data buku & anggota
+    const buku = await Buku.findByPk(id_buku);
+    const anggota = await Anggota.findByPk(id_anggota);
+
+    if (!buku || !anggota) {
+      return res.status(404).json({ error: "Data buku atau anggota tidak ditemukan" });
+    }
+
+    // Simpan data ke tabel peminjaman
     const peminjaman = await Peminjaman.create({
       id_anggota,
       id_buku,
+      nomor_hp: anggota.nomor_hp,
+      nim: anggota.nim,
+      judul_buku: buku.judul_buku,
       tanggal_pinjam,
       tanggal_kembali,
       status: "Dipinjam",
     });
 
-    const anggota = await Anggota.findByPk(id_anggota);
-    const buku = await Buku.findByPk(id_buku);
-
+    // Format tanggal untuk pesan
     const tanggal_pinjam_format = new Date(tanggal_pinjam).toLocaleDateString("id-ID");
     const tanggal_kembali_format = new Date(tanggal_kembali).toLocaleDateString("id-ID");
 
@@ -117,7 +128,91 @@ const getPeminjamanByAnggota = async (req, res) => {
   }
 };
 
+const getAllPeminjaman = async (req, res) => {
+  try {
+    const peminjamanList = await Peminjaman.findAll({
+  include: [
+    {
+      model: Buku,
+      attributes: ['id_buku', 'judul_buku', 'penulis', 'kategori', 'cover']
+    },
+    {
+      model: Anggota,
+      as: 'anggota', // ⬅️ Samakan dengan alias di atas
+      attributes: ['id_anggota', 'nomor_hp', 'nama', 'nim', 'prodi', 'fakultas']
+    }
+  ],
+  order: [['tanggal_pinjam', 'DESC']]
+});
+
+
+    res.status(200).json({ data: peminjamanList });
+  } catch (error) {
+    console.error('Gagal mengambil data peminjaman:', error);
+    res.status(500).json({
+      error: 'Gagal mengambil data peminjaman',
+      detail: error.message
+    });
+  }
+};
+
+// Fungsi bantu untuk hitung denda
+function hitungDenda(tanggalKembali, tanggalPengembalian, tarifPerHari = 2000) {
+  const kembali = new Date(tanggalKembali);
+  const pengembalian = new Date(tanggalPengembalian);
+
+  const selisihHari = Math.floor((pengembalian - kembali) / (1000 * 60 * 60 * 24));
+  return selisihHari > 0 ? selisihHari * tarifPerHari : 0;
+}
+
+const kembalikanBuku = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const peminjaman = await Peminjaman.findByPk(id);
+
+    if (!peminjaman) {
+      return res.status(404).json({ error: 'Data peminjaman tidak ditemukan' });
+    }
+
+    if (peminjaman.status === 'Dikembalikan') {
+      return res.status(400).json({ error: 'Buku sudah dikembalikan' });
+    }
+
+    const tanggalPengembalian = new Date(); // Hari ini
+    const tanggalKembali = new Date(peminjaman.tanggal_kembali);
+
+    const denda = hitungDenda(tanggalKembali, tanggalPengembalian);
+
+    // Update status
+    await peminjaman.update({
+      status: 'Dikembalikan',
+      tanggal_pengembalian: tanggalPengembalian,
+      denda: denda
+    });
+
+    res.json({
+      message: 'Buku berhasil dikembalikan',
+      data: {
+        id_peminjaman: peminjaman.id_peminjaman,
+        id_buku: peminjaman.id_buku,
+        id_anggota: peminjaman.id_anggota,
+        tanggal_pinjam: peminjaman.tanggal_pinjam,
+        tanggal_kembali: peminjaman.tanggal_kembali,
+        tanggal_pengembalian: peminjaman.tanggal_pengembalian,
+        denda,
+        status: 'Dikembalikan'
+      }
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Gagal mengembalikan buku', detail: err.message });
+  }
+};
+
 module.exports = {
   pinjamBuku,
   getPeminjamanByAnggota,
+  getAllPeminjaman,
+  kembalikanBuku
 };

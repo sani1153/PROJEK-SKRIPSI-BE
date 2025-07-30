@@ -6,6 +6,10 @@ const AnggotaController = require('../controller/AnggotaController');
 router.post('/daftar', AnggotaController.daftarAnggota);
 router.post('/login', AnggotaController.loginAnggota);
 router.put("/anggota/:id_anggota/ubah-password", AnggotaController.ubahPasswordAnggota);
+router.put('/anggota/:id_anggota', AnggotaController.editAnggota);
+router.delete('/anggota/:id_anggota', AnggotaController.hapusAnggota);
+router.get('/anggota', AnggotaController.getSemuaAnggota);         // GET semua anggota
+router.get('/anggota/:id_anggota', AnggotaController.getAnggotaById);      // GET anggota by ID
 
 // [Opsional] Endpoint manual untuk kirim ulang QR (misalnya via Postman)
 router.post('/kirim-ulang', async (req, res) => {

@@ -1,50 +1,64 @@
-const { DataTypes } = require('sequelize');
-const db = require('../config/db');
+const { DataTypes } = require("sequelize");
+const db = require("../config/db");
 
-const Peminjaman = db.define('peminjaman', {
+const Peminjaman = db.define(
+  "peminjaman",
+  {
     id_peminjaman: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
     id_anggota: {
       type: DataTypes.STRING(255),
       foreignKey: true,
-      allowNull: false
+      allowNull: false,
     },
     id_buku: {
       type: DataTypes.STRING(255),
       foreignKey: true,
-      allowNull: false
+      allowNull: false,
+    },
+    nomor_hp: {
+      type: DataTypes.STRING(255),
+      // allowNull: false,
+      // unique: true,
+    },
+    nim: {
+      type: DataTypes.STRING(255),
+      // allowNull: false,
+      unique: true,
+    },
+    judul_buku: {
+      type: DataTypes.STRING(255),
+      // allowNull: false,
     },
     tanggal_pinjam: {
       type: DataTypes.DATEONLY,
-      allowNull: false
+      allowNull: false,
     },
     tanggal_kembali: {
       type: DataTypes.DATEONLY,
-      allowNull: true
+      allowNull: true,
     },
     tanggal_pengembalian: {
       type: DataTypes.DATEONLY,
-      allowNull: true
-    },    
+      allowNull: true,
+    },
     status: {
-      type: DataTypes.ENUM('Dipinjam', 'Dikembalikan'),
+      type: DataTypes.ENUM("Dipinjam", "Dikembalikan"),
       allowNull: false,
-      defaultValue: 'Dipinjam'
+      defaultValue: "Dipinjam",
     },
     denda: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      defaultValue: 0
-    }
-  }, {
-    freezeTableName: true
-  });
-
-// db.sync({ alter: true })
-//   .then(() => console.log("All models synced"))
-//   .catch((error) => console.error(`Unable to sync database: ${error}`));
+      defaultValue: 0,
+    },
+  },
+  {
+    freezeTableName: true,
+  }
+);
 
 module.exports = Peminjaman;

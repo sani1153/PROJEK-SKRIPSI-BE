@@ -62,6 +62,127 @@ const daftarAnggota = async (req, res) => {
   }
 };
 
+const editAnggota = async (req, res) => {
+  // 1. Ambil ID unik anggota dari parameter URL
+  const { id_anggota } = req.params; 
+  
+  // 2. Ambil data baru dari body request
+  const { nama, nim, nomor_hp, prodi, fakultas, alamat, password } = req.body;
+
+  try {
+    // 3. PERBAIKAN: Cari anggota berdasarkan Primary Key (id) yang benar
+    const anggota = await Anggota.findByPk(id_anggota);
+
+    // Jika anggota dengan ID tersebut tidak ada, kirim error 404
+    if (!anggota) {
+      return res.status(404).json({ error: 'Anggota tidak ditemukan' });
+    }
+
+    // 4. PERBAIKAN: Cek apakah NIM atau No. HP yang baru sudah digunakan oleh anggota LAIN
+    // Pengecekan ini hanya berjalan jika ada input 'nim' atau 'nomor_hp'
+    if (nim || nomor_hp) {
+        const existing = await Anggota.findOne({
+            where: {
+                // Cari data yang memiliki NIM atau nomor HP yang sama dengan input
+                [Op.or]: [
+                    { nim: nim || null }, 
+                    { nomor_hp: nomor_hp || null }
+                ],
+                // KECUALI untuk anggota yang sedang kita edit saat ini
+                id_anggota: { [Op.ne]: id_anggota } 
+            }
+        });
+
+        // Jika ditemukan data lain yang menggunakan NIM/No.HP tersebut, kirim error
+        if (existing) {
+            return res.status(400).json({ error: 'NIM atau Nomor HP sudah digunakan oleh anggota lain' });
+        }
+    }
+
+    // 5. Logika untuk update password (sudah benar)
+    // Hanya update password jika ada input password baru yang tidak kosong
+    if (password && password.trim() !== '') {
+      anggota.password = await bcrypt.hash(password, 10);
+    }
+
+    // 6. Update data anggota dengan nilai baru
+    anggota.nama = nama;
+    anggota.nim = nim;
+    anggota.nomor_hp = nomor_hp;
+    anggota.prodi = prodi;
+    anggota.fakultas = fakultas;
+    anggota.alamat = alamat;
+    
+    // Simpan semua perubahan ke database
+    await anggota.save();
+
+    res.json({ message: 'Data anggota berhasil diperbarui', anggota });
+    
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Gagal mengedit anggota', detail: err.message });
+  }
+};
+
+
+const hapusAnggota = async (req, res) => {
+  const { id_anggota } = req.params;
+
+  try {
+    const anggota = await Anggota.findByPk(id);
+
+    if (!anggota) {
+      return res.status(404).json({ error: 'Anggota tidak ditemukan' });
+    }
+
+    // Hapus file QR jika ada
+    if (anggota.QR_path && fs.existsSync(anggota.QR_path)) {
+      fs.unlinkSync(anggota.QR_path);
+    }
+
+    // Hapus data anggota
+    await anggota.destroy();
+
+    res.json({ message: 'Anggota berhasil dihapus' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Gagal menghapus anggota', detail: err.message });
+  }
+};
+
+const getSemuaAnggota = async (req, res) => {
+  try {
+    const anggotaList = await Anggota.findAll({
+      attributes: { exclude: ['password'] }, // Hindari mengirimkan password
+      order: [['nama', 'ASC']] // Optional: urutkan berdasarkan nama
+    });
+
+    res.json({ data: anggotaList });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Gagal mengambil data anggota', detail: err.message });
+  }
+};
+
+const getAnggotaById = async (req, res) => {
+  const { id_anggota } = req.params;
+
+  try {
+    const anggota = await Anggota.findByPk(id, {
+      attributes: { exclude: ['password'] }
+    });
+
+    if (!anggota) {
+      return res.status(404).json({ error: 'Anggota tidak ditemukan' });
+    }
+
+    res.json({ data: anggota });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Gagal mengambil data anggota', detail: err.message });
+  }
+};
+
 const kirimUlangQRCode = async (nomor) => {
   // TAMBAHKAN PENGECEKAN KESIAPAN CLIENT DI SINI JUGA
   if (!isReady()) {
@@ -186,9 +307,14 @@ const ubahPasswordAnggota = async (req, res) => {
 };
 
 
+
 module.exports = {
   daftarAnggota,
   kirimUlangQRCode,
   loginAnggota,
-  ubahPasswordAnggota
+  ubahPasswordAnggota,
+  editAnggota,
+  hapusAnggota,
+  getSemuaAnggota,
+  getAnggotaById
 };
