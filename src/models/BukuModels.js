@@ -50,6 +50,11 @@ const Buku = db.define('buku', {
         type: DataTypes.INTEGER,   // Jumlah halaman
         allowNull: true
     },
+    stok: {
+        type: DataTypes.INTEGER,   // Jumlah stok buku
+        allowNull: false,
+        defaultValue: 0
+    }
 }, {
     freezeTableName: true
 });

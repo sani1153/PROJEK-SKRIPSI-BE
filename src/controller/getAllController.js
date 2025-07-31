@@ -7,6 +7,7 @@ const getAllData = async (req, res) => {
   try {
     const totalAnggota = await Anggota.count();
     const totalBuku = await Buku.count();
+    const stokBuku = await Buku.sum('stok'); // Hitung total stok buku
     const peminjaman = await Peminjaman.findAll();
 
     let totalDendaBelumDibayar = 0;
@@ -28,6 +29,7 @@ const getAllData = async (req, res) => {
     res.status(200).json({
       totalAnggota,
       totalBuku,
+      stokBuku,
       totalSedangDipinjam,
       totalDendaBelumDibayar,
       peminjamanPerBulan // ⬅️ ini akan dipakai untuk chart di frontend

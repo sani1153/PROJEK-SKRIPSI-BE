@@ -27,7 +27,7 @@ const Peminjaman = db.define(
     nim: {
       type: DataTypes.STRING(255),
       // allowNull: false,
-      unique: true,
+      // unique: true,
     },
     judul_buku: {
       type: DataTypes.STRING(255),
@@ -60,5 +60,9 @@ const Peminjaman = db.define(
     freezeTableName: true,
   }
 );
+
+// db.sync({ alter: true })
+//   .then(() => console.log("All models synced"))
+//   .catch((error) => console.error(`Unable to sync database: ${error}`));
 
 module.exports = Peminjaman;

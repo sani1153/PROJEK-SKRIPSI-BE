@@ -42,7 +42,6 @@ const pinjamBuku = async (req, res) => {
       );
     }
 
-    // Ambil data buku & anggota
     const buku = await Buku.findByPk(id_buku);
     const anggota = await Anggota.findByPk(id_anggota);
 
@@ -50,7 +49,10 @@ const pinjamBuku = async (req, res) => {
       return res.status(404).json({ error: "Data buku atau anggota tidak ditemukan" });
     }
 
-    // Simpan data ke tabel peminjaman
+    if (buku.stok <= 0) {
+      return res.status(400).json({ error: "Stok buku habis. Tidak dapat dipinjam." });
+    }
+
     const peminjaman = await Peminjaman.create({
       id_anggota,
       id_buku,
@@ -62,7 +64,9 @@ const pinjamBuku = async (req, res) => {
       status: "Dipinjam",
     });
 
-    // Format tanggal untuk pesan
+    // Kurangi stok buku
+    await buku.update({ stok: buku.stok - 1 });
+
     const tanggal_pinjam_format = new Date(tanggal_pinjam).toLocaleDateString("id-ID");
     const tanggal_kembali_format = new Date(tanggal_kembali).toLocaleDateString("id-ID");
 
@@ -77,6 +81,7 @@ const pinjamBuku = async (req, res) => {
     res.status(500).json({ error: "Gagal memproses peminjaman", detail: err.message });
   }
 };
+
 
 const tolak = async (req, res, id_anggota, alasan) => {
   const anggota = await Anggota.findByPk(id_anggota);
@@ -156,7 +161,6 @@ const getAllPeminjaman = async (req, res) => {
   }
 };
 
-// Fungsi bantu untuk hitung denda
 function hitungDenda(tanggalKembali, tanggalPengembalian, tarifPerHari = 2000) {
   const kembali = new Date(tanggalKembali);
   const pengembalian = new Date(tanggalPengembalian);
@@ -166,53 +170,44 @@ function hitungDenda(tanggalKembali, tanggalPengembalian, tarifPerHari = 2000) {
 }
 
 const kembalikanBuku = async (req, res) => {
-  const { id } = req.params;
-
   try {
+    const { id } = req.params;
+    const tanggalPengembalian = new Date().toISOString().slice(0, 10);
+
     const peminjaman = await Peminjaman.findByPk(id);
-
     if (!peminjaman) {
-      return res.status(404).json({ error: 'Data peminjaman tidak ditemukan' });
+      return res.status(404).json({ error: "Data peminjaman tidak ditemukan" });
     }
 
-    if (peminjaman.status === 'Dikembalikan') {
-      return res.status(400).json({ error: 'Buku sudah dikembalikan' });
+    if (peminjaman.status === "Dikembalikan") {
+      return res.status(400).json({ error: "Buku sudah dikembalikan sebelumnya" });
     }
 
-    const tanggalPengembalian = new Date(); // Hari ini
-    const tanggalKembali = new Date(peminjaman.tanggal_kembali);
+    const denda = hitungDenda(peminjaman.tanggal_kembali, tanggalPengembalian);
 
-    const denda = hitungDenda(tanggalKembali, tanggalPengembalian);
-
-    // Update status
     await peminjaman.update({
-      status: 'Dikembalikan',
+      status: "Dikembalikan",
       tanggal_pengembalian: tanggalPengembalian,
       denda: denda
     });
 
-    res.json({
-      message: 'Buku berhasil dikembalikan',
-      data: {
-        id_peminjaman: peminjaman.id_peminjaman,
-        id_buku: peminjaman.id_buku,
-        id_anggota: peminjaman.id_anggota,
-        tanggal_pinjam: peminjaman.tanggal_pinjam,
-        tanggal_kembali: peminjaman.tanggal_kembali,
-        tanggal_pengembalian: peminjaman.tanggal_pengembalian,
-        denda,
-        status: 'Dikembalikan'
-      }
-    });
+    // Tambahkan stok buku
+    const buku = await Buku.findByPk(peminjaman.id_buku);
+    if (buku) {
+      await buku.update({ stok: buku.stok + 1 });
+    }
+
+    res.status(200).json({ message: "Buku berhasil dikembalikan", peminjaman });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Gagal mengembalikan buku', detail: err.message });
+    console.error("Gagal mengembalikan buku:", err);
+    res.status(500).json({ error: "Gagal mengembalikan buku", detail: err.message });
   }
 };
+
 
 module.exports = {
   pinjamBuku,
   getPeminjamanByAnggota,
   getAllPeminjaman,
-  kembalikanBuku
+  kembalikanBuku,
 };

@@ -12,6 +12,7 @@ const notifikasiRoutes = require('./src/routes/notifikasiRoutes');
 const bukuRoute = require('./src/routes/BukuRoutes');
 const petugasRoutes = require('./src/routes/petugasRoutes');
 const getAllRoutes = require('./src/routes/getAllRoutes');
+const pengumumanRoutes = require('./src/routes/PengumumanRoutes'); // Import pengumuman routes
 
 // Import middleware
 const authenticate = require('./src/middleware/authenticate');
@@ -40,6 +41,7 @@ app.use(peminjamanRoutes);
 app.use(notifikasiRoutes);
 app.use(petugasRoutes);
 app.use(getAllRoutes);
+app.use(pengumumanRoutes); // Tambahkan rute pengumuman
 
 // Root
 app.get('/', (req, res) => {
