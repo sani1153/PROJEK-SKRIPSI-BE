@@ -2,7 +2,7 @@ const cron = require('node-cron');
 const { Op } = require('sequelize');
 const Peminjaman = require('../models/PeminjamanModels');
 
-cron.schedule('* * * * *', async () => {
+cron.schedule('0 7 * * *', async () => {
   console.log("⏰ Mengecek denda otomatis...");
   const today = new Date();
 
