@@ -4,6 +4,16 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const db = require('./src/config/db');
+const cron = require("node-cron");
+const pengingatPeminjaman = require("./src/jobs/pengingatPeminjaman");
+require('./src/jobs/dendaChecker'); // Import denda checker
+
+
+// Jalankan setiap hari jam 07:00 pagi
+cron.schedule("* * * * *", async () => {
+  console.log("⏰ Menjalankan pengingat otomatis peminjaman...");
+  await pengingatPeminjaman();
+});
 
 // Import routes
 const anggotaRoutes = require('./src/routes/anggotaRoutes');
@@ -14,8 +24,6 @@ const petugasRoutes = require('./src/routes/petugasRoutes');
 const getAllRoutes = require('./src/routes/getAllRoutes');
 const pengumumanRoutes = require('./src/routes/PengumumanRoutes'); // Import pengumuman routes
 
-// Import middleware
-const authenticate = require('./src/middleware/authenticate');
 
 const app = express();
 const PORT = process.env.PORT || 3001;

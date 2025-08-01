@@ -11,27 +11,20 @@ const Peminjaman = db.define(
     },
     id_anggota: {
       type: DataTypes.STRING(255),
-      foreignKey: true,
       allowNull: false,
     },
     id_buku: {
       type: DataTypes.STRING(255),
-      foreignKey: true,
       allowNull: false,
     },
     nomor_hp: {
       type: DataTypes.STRING(255),
-      // allowNull: false,
-      // unique: true,
     },
     nim: {
       type: DataTypes.STRING(255),
-      // allowNull: false,
-      // unique: true,
     },
     judul_buku: {
       type: DataTypes.STRING(255),
-      // allowNull: false,
     },
     tanggal_pinjam: {
       type: DataTypes.DATEONLY,
@@ -58,11 +51,28 @@ const Peminjaman = db.define(
   },
   {
     freezeTableName: true,
+
+    // Tambahkan hooks di sini
+    hooks: {
+      beforeUpdate: (peminjaman, options) => {
+        if (
+          peminjaman.changed("tanggal_pengembalian") &&
+          peminjaman.tanggal_kembali &&
+          peminjaman.tanggal_pengembalian
+        ) {
+          const kembali = new Date(peminjaman.tanggal_kembali);
+          const dikembalikan = new Date(peminjaman.tanggal_pengembalian);
+
+          const selisihHari = Math.floor(
+            (dikembalikan - kembali) / (1000 * 60 * 60 * 24)
+          );
+
+          const denda = selisihHari > 0 ? selisihHari * 2000 : 0;
+          peminjaman.denda = denda;
+        }
+      },
+    },
   }
 );
-
-// db.sync({ alter: true })
-//   .then(() => console.log("All models synced"))
-//   .catch((error) => console.error(`Unable to sync database: ${error}`));
 
 module.exports = Peminjaman;
