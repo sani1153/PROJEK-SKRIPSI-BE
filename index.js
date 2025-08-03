@@ -73,7 +73,9 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: 'Internal Server Error', error: err.message });
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Server berjalan di http://localhost:${PORT}`);
+const HOST = '0.0.0.0';
+
+app.listen(PORT, HOST, () => {
+  // Pesan log diubah agar lebih jelas
+  console.log(`🚀 Server berjalan dan siap menerima koneksi di port ${PORT}`);
 });

@@ -12,10 +12,12 @@ const Peminjaman = db.define(
     id_anggota: {
       type: DataTypes.STRING(255),
       allowNull: false,
+      foreignKey: true,
     },
     id_buku: {
       type: DataTypes.STRING(255),
       allowNull: false,
+      foreignKey: true,
     },
     nomor_hp: {
       type: DataTypes.STRING(255),

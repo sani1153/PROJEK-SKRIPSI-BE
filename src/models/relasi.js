@@ -13,7 +13,6 @@ Peminjaman.belongsTo(Anggota, {
   as: 'anggota', // ⬅️ Tambahkan alias di sini
 });
 
-
 module.exports = {
   Buku,
   Peminjaman,

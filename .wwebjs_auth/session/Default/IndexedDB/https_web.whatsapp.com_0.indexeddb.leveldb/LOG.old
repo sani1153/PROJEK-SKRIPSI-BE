@@ -1,4 +1,48 @@
-2025/08/01-19:15:46.421 292c Reusing MANIFEST E:\Moh. Din Nur Ikhsani\Semester 8 (Skripsi)\Skripsi\Projek\New folder\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2025/08/01-19:15:46.424 292c Recovering log #3779
-2025/08/01-19:15:46.476 292c Reusing old log E:\Moh. Din Nur Ikhsani\Semester 8 (Skripsi)\Skripsi\Projek\New folder\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/003779.log 
-2025/08/01-19:15:49.220 3ec4 Manual compaction at level-0 from '\x00\xc3\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\xc4\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/08/03-12:38:00.774 280c Reusing MANIFEST E:\Moh. Din Nur Ikhsani\Semester 8 (Skripsi)\Skripsi\Projek\New folder\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/08/03-12:38:00.778 280c Recovering log #4379
+2025/08/03-12:38:00.997 280c Reusing old log E:\Moh. Din Nur Ikhsani\Semester 8 (Skripsi)\Skripsi\Projek\New folder\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/004379.log 
+2025/08/03-12:38:14.727 3c54 Level-0 table #4399: started
+2025/08/03-12:38:14.851 3c54 Level-0 table #4399: 629581 bytes OK
+2025/08/03-12:38:14.943 3c54 Delete type=0 #4379
+2025/08/03-12:38:14.956 3c54 Manual compaction at level-0 from '\x00\xd0\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\xd1\x00\x00\x00' @ 0 : 0; will stop at '\x00\xd0\x00\x00\x05' @ 7552195 : 1
+2025/08/03-12:38:14.957 3c54 Compacting 1@0 + 0@1 files
+2025/08/03-12:38:15.121 3c54 Generated table #4400@0: 14390 keys, 288918 bytes
+2025/08/03-12:38:15.179 3c54 Generated table #4401@0: 317 keys, 34727 bytes
+2025/08/03-12:38:15.180 3c54 Compacted 1@0 + 0@1 files => 323645 bytes
+2025/08/03-12:38:15.211 3c54 compacted to: files[ 0 2 25 0 0 0 0 ]
+2025/08/03-12:38:15.213 3c54 Delete type=2 #4399
+2025/08/03-12:38:15.213 3c54 Manual compaction at level-0 from '\x00\xd0\x00\x00\x05' @ 7552195 : 1 .. '\x00\xd1\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/08/03-12:38:19.867 2c40 Compacting 1@1 + 8@2 files
+2025/08/03-12:38:20.260 2c40 Generated table #4402@1: 12720 keys, 2169448 bytes
+2025/08/03-12:38:20.929 2c40 Generated table #4403@1: 26177 keys, 2267007 bytes
+2025/08/03-12:38:21.400 2c40 Generated table #4404@1: 21690 keys, 2190332 bytes
+2025/08/03-12:38:21.742 2c40 Generated table #4405@1: 6101 keys, 2128050 bytes
+2025/08/03-12:38:22.269 2c40 Generated table #4406@1: 42791 keys, 2176455 bytes
+2025/08/03-12:38:22.701 2c40 Generated table #4407@1: 100477 keys, 2250265 bytes
+2025/08/03-12:38:23.153 2c40 Generated table #4408@1: 100543 keys, 2251571 bytes
+2025/08/03-12:38:23.370 2c40 Generated table #4409@1: 34034 keys, 806250 bytes
+2025/08/03-12:38:23.371 2c40 Compacted 1@1 + 8@2 files => 16239378 bytes
+2025/08/03-12:38:23.409 2c40 compacted to: files[ 0 1 25 0 0 0 0 ]
+2025/08/03-12:38:23.411 2c40 Delete type=2 #4359
+2025/08/03-12:38:23.411 2c40 Delete type=2 #4360
+2025/08/03-12:38:23.411 2c40 Delete type=2 #4383
+2025/08/03-12:38:23.411 2c40 Delete type=2 #4384
+2025/08/03-12:38:23.411 2c40 Delete type=2 #4385
+2025/08/03-12:38:23.411 2c40 Delete type=2 #4386
+2025/08/03-12:38:23.411 2c40 Delete type=2 #4387
+2025/08/03-12:38:23.411 2c40 Delete type=2 #4388
+2025/08/03-12:38:23.411 2c40 Delete type=2 #4401
+2025/08/03-12:38:23.582 33c8 Compacting 1@1 + 11@2 files
+2025/08/03-12:38:23.983 33c8 Generated table #4410@1: 88762 keys, 2239047 bytes
+2025/08/03-12:38:24.469 33c8 Generated table #4411@1: 94909 keys, 2246314 bytes
+2025/08/03-12:38:24.895 33c8 Generated table #4412@1: 95122 keys, 2247460 bytes
+2025/08/03-12:38:25.478 33c8 Generated table #4413@1: 101401 keys, 2254266 bytes
+2025/08/03-12:38:26.135 33c8 Generated table #4414@1: 101479 keys, 2254005 bytes
+2025/08/03-12:38:26.542 33c8 Generated table #4415@1: 70020 keys, 2287983 bytes
+2025/08/03-12:38:26.826 33c8 Generated table #4416@1: 30267 keys, 2207857 bytes
+2025/08/03-12:38:26.997 33c8 Generated table #4417@1: 2234 keys, 2153052 bytes
+2025/08/03-12:38:27.137 33c8 Generated table #4418@1: 2729 keys, 2154700 bytes
+2025/08/03-12:38:27.298 33c8 Generated table #4419@1: 2091 keys, 2145665 bytes
+2025/08/03-12:38:27.344 33c8 Generated table #4420@1: 181 keys, 130553 bytes
+2025/08/03-12:38:27.344 33c8 Compacted 1@1 + 11@2 files => 22320902 bytes
+2025/08/03-12:38:27.369 33c8 compacted to: files[ 0 0 25 0 0 0 0 ]
