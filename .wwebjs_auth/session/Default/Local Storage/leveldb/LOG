@@ -1,3 +1,6 @@
-2025/08/03-12:49:23.011 4278 Reusing MANIFEST E:\Moh. Din Nur Ikhsani\Semester 8 (Skripsi)\Skripsi\Projek\New folder\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
-2025/08/03-12:49:23.013 4278 Recovering log #94
-2025/08/03-12:49:23.014 4278 Reusing old log E:\Moh. Din Nur Ikhsani\Semester 8 (Skripsi)\Skripsi\Projek\New folder\.wwebjs_auth\session\Default\Local Storage\leveldb/000094.log 
+2025/08/09-16:34:43.362 4034 Reusing MANIFEST E:\Moh. Din Nur Ikhsani\Semester 8 (Skripsi)\Skripsi\Projek\New folder\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
+2025/08/09-16:34:43.363 4034 Recovering log #101
+2025/08/09-16:34:45.059 4034 Reusing old log E:\Moh. Din Nur Ikhsani\Semester 8 (Skripsi)\Skripsi\Projek\New folder\.wwebjs_auth\session\Default\Local Storage\leveldb/000101.log 
+2025/08/09-16:36:49.988 2ac8 Level-0 table #105: started
+2025/08/09-16:36:50.090 2ac8 Level-0 table #105: 14714 bytes OK
+2025/08/09-16:36:50.137 2ac8 Delete type=0 #101

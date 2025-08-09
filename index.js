@@ -18,7 +18,6 @@ cron.schedule("0 7 * * *", async () => {
 // Import routes
 const anggotaRoutes = require('./src/routes/anggotaRoutes');
 const peminjamanRoutes = require('./src/routes/peminjamanRoutes');
-const notifikasiRoutes = require('./src/routes/notifikasiRoutes');
 const bukuRoute = require('./src/routes/BukuRoutes');
 const petugasRoutes = require('./src/routes/petugasRoutes');
 const getAllRoutes = require('./src/routes/getAllRoutes');
@@ -46,7 +45,6 @@ app.use((req, res, next) => {
 app.use(anggotaRoutes); // login & daftar tidak perlu token
 app.use(bukuRoute);
 app.use(peminjamanRoutes);
-app.use(notifikasiRoutes);
 app.use(petugasRoutes);
 app.use(getAllRoutes);
 app.use(pengumumanRoutes); // Tambahkan rute pengumuman
