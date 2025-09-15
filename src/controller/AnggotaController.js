@@ -129,7 +129,7 @@ const hapusAnggota = async (req, res) => {
   const { id_anggota } = req.params;
 
   try {
-    const anggota = await Anggota.findByPk(id);
+    const anggota = await Anggota.findByPk(id_anggota);
 
     if (!anggota) {
       return res.status(404).json({ error: 'Anggota tidak ditemukan' });
@@ -168,7 +168,7 @@ const getAnggotaById = async (req, res) => {
   const { id_anggota } = req.params;
 
   try {
-    const anggota = await Anggota.findByPk(id, {
+    const anggota = await Anggota.findByPk(id_anggota, {
       attributes: { exclude: ['password'] }
     });
 

@@ -10,7 +10,7 @@ require('./src/jobs/dendaChecker'); // Import denda checker
 
 
 // Jalankan setiap hari jam 07:00 pagi
-cron.schedule("0 7 * * *", async () => {
+cron.schedule("* * * * *", async () => {
   console.log("⏰ Menjalankan pengingat otomatis peminjaman...");
   await pengingatPeminjaman();
 });
